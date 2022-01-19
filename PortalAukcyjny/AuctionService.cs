@@ -18,7 +18,6 @@ namespace ConsoleApp2
 
         public List<Item> AllItems { get; set; }
         public List<CreditCard> AllCreditCards { get; set; }
-        public Item CurrentItems { get; set; }
 
         public void CreateItems()
         {

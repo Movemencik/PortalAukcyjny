@@ -10,6 +10,8 @@ namespace ConsoleApp2
             int number = Display.DisplayStartScreen();
             if (number == 1)
             {
+                int choice = Display.ItemSelection(service.AllItems);
+                int cc = Display.CreditCardSelection();
             }
             else if (number == 2)
             {

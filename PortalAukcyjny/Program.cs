@@ -10,11 +10,14 @@ namespace ConsoleApp2
             int number = Display.DisplayStartScreen();
             if (number == 1)
             {
-                int choice = Display.ItemSelection(service.AllItems);
+                int choice = Display.ItemSelection(service.AllItemsOrderBy);
+                Console.Clear();
                 int cc = Display.CreditCardSelection();
+                AuctionService.PurchaseItem(choice, cc, service.AllItemsOrderBy, service.AllCreditCards, false);
             }
             else if (number == 2)
             {
+
             }
             else { }
         }

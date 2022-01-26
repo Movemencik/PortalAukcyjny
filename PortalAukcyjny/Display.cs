@@ -101,6 +101,7 @@ namespace ConsoleApp2
         }
         public static int ItemSelection(List<Item> service)
         {
+            Console.Clear();
             ShowAllItems(service);
             string key = Console.ReadLine();
             bool IsCorrect = IsCorrectKeyItem(key);
@@ -114,13 +115,15 @@ namespace ConsoleApp2
         }
         public static int CreditCardSelection()
         {
-            Console.Clear();
             Console.WriteLine("PODAJ NUMER KARTY KREDYTOWEJ (CZTERY CYFRY):");
             string key = Console.ReadLine();
             bool IsCorrect = IsCorrectKeyCard(key);
             while (!IsCorrect)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("NIEPRAWIDŁOWY NUMER KARTY");
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("PODAJ NUMER KARTY KREDYTOWEJ (CZTERY CYFRY):");
                 key = Console.ReadLine();
                 IsCorrect = IsCorrectKeyCard(key);

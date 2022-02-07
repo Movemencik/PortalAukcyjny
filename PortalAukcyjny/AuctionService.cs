@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,33 +15,27 @@ namespace ConsoleApp2
             CreateCreditCards();
         }
 
-        public List<Item> AllItems { get; set; }
-        public List<CreditCard> AllCreditCards { get; set; }
+        public List<Item> AllItems { get; set; } = new List<Item>();
+        public List<CreditCard> AllCreditCards { get; set; } = new List<CreditCard>();
         public List<Item> AllItemsOrderBy
         {
             get { return AllItems.OrderByDescending(x => x.Awarded).ToList(); }
         }
         public void CreateItems()
         {
-            string path = Directory.GetCurrentDirectory() + "\\items.json";
-            string text = File.ReadAllText(path);
-            var items = JsonConvert.DeserializeObject<List<Item>>(text);
-            for (int i = 0; i < items.Count; i++)
-            {
-                items[i].Id = i + 1;
-            }
-            AllItems = items;
+            AllItems.Add(new Item("iPhone 12 PRO", "elektronika", 4600, true));
+            AllItems.Add(new Item("Konsola Playstaion 5", "elektronika", 2899, false));
+            AllItems.Add(new Item("Bluza Adidas Męska Szara", "odzież", 249, true));
+            AllItems.Add(new Item("Spodnie Wrandler Arizona", "odzież", 189, false));
+            AllItems.Add(new Item("Basen ogrodowy Premium", "dom i ogród", 1199, false));
+            AllItems.Add(new Item("Krzesło skandynawskie granatowe", "dom i ogród", 4600, false));
         }
         private void CreateCreditCards()
         {
-            string path = Directory.GetCurrentDirectory() + "\\creditcards.json";
-            string text = File.ReadAllText(path);
-            var creditcards = JsonConvert.DeserializeObject<List<CreditCard>>(text);
-            for (int i = 0; i < creditcards.Count; i++)
-            {
-                creditcards[i].Id = i + 1;
-            }
-            AllCreditCards = creditcards;
+            AllCreditCards.Add(new CreditCard("Visa", 001, 100));
+            AllCreditCards.Add(new CreditCard("Mastercard", 002, 10000));
+            AllCreditCards.Add(new CreditCard("American Express", 003, 3000));
+            AllCreditCards.Add(new CreditCard("Diners Club", 004, 1000));
         }
         public static void PurchaseItem(int choice, int cc, List<Item> itmes, List<CreditCard> credits, bool xs)
         {
@@ -68,6 +61,51 @@ namespace ConsoleApp2
                 }
                 Console.ForegroundColor = ConsoleColor.White;
             }
+        }
+        public static void AddItem(AuctionService service)
+        {
+            Console.Clear();
+            Console.WriteLine("PODAJ NAZWĘ PRZEDMIOTU, KTÓRY CHCESZ SPRZEDAĆ: ");
+            string nnazwa = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("PODAJ KATEGORIĘ PRZEDMIOTU, DO KTÓREJ NALEŻY PRODUKT: ");
+            string kkategoria = Console.ReadLine();
+            int x = XPrice();
+            bool y = YAwarded();
+            service.AllItems.Add(new Item(nnazwa, kkategoria, x, y));
+        }
+        private static int XPrice()
+        {
+            Console.Clear();
+            Console.Write("PODAJ CENĘ PRZEDMIOTU, KTÓRĄ CHCESZ OTRZYMAĆ: ");
+            string price = Console.ReadLine();
+            int convert;
+            bool canconvert = int.TryParse(price, out convert);
+            while (!canconvert)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("NIEPRAWIDŁOWA CENA PRZEDMIOTU");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("");
+                Console.Write("PODAJ CENĘ PRZEDMIOTU, KTÓRĄ CHCESZ OTRZYMAĆ: ");
+                price = Console.ReadLine();
+                canconvert = int.TryParse(price, out convert);
+
+            }
+            return convert;
+        }
+        private static bool YAwarded()
+        {
+            Console.Clear();
+            Console.Write("NAPISZ 'tak' JEŻELI PRZEDMIOT MA BYĆ PROMOWANY: ");
+            string yaw = Console.ReadLine();
+            if (yaw == "tak")
+            {
+                return true;
+            }
+            else
+                return false;
         }
     }
 }

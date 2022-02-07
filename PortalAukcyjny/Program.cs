@@ -17,7 +17,8 @@ namespace ConsoleApp2
             }
             else if (number == 2)
             {
-
+                AuctionService.AddItem(service);
+                Display.ShowAllItems(service.AllItemsOrderBy);
             }
             else { }
         }

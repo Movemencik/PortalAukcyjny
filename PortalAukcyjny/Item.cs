@@ -8,7 +8,13 @@ namespace ConsoleApp2
 {
     public class Item
     {
-        public int Id { get; set; }
+        public Item(string name, string category, int price, bool awarded)
+        {
+            Name = name;
+            Category = category;
+            Price = price;
+            Awarded = awarded;
+        }
         public string Category { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }

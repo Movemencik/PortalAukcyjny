@@ -77,7 +77,7 @@ namespace ConsoleApp2
 
             return int.Parse(key);
         }
-        private static void ShowAllItems(List<Item> service)
+        public static void ShowAllItems(List<Item> service)
         {
             Console.Clear();
             Console.WriteLine("LISTA PRZEDMIOTÓW NA AUKCJI");
@@ -96,13 +96,13 @@ namespace ConsoleApp2
                 }
             }
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("");
-            Console.Write("PODAJ NUMER PRODUKTU KTÓRY CHCESZ ZAKUPIĆ: ");
         }
         public static int ItemSelection(List<Item> service)
         {
             Console.Clear();
             ShowAllItems(service);
+            Console.WriteLine("");
+            Console.Write("PODAJ NUMER PRODUKTU KTÓRY CHCESZ ZAKUPIĆ: ");
             string key = Console.ReadLine();
             bool IsCorrect = IsCorrectKeyItem(key);
             while (!IsCorrect)

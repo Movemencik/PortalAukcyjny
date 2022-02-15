@@ -82,22 +82,23 @@ namespace ConsoleApp2
             Console.Clear();
             Console.WriteLine("LISTA PRZEDMIOTÓW NA AUKCJI");
             Console.WriteLine("---------------------------");
-            for (int i = 0; i < service.Count; i++)
+            int x = 1;
+            foreach (Item item in service)
             {
-                if (service[i].Awarded == true)
+                if (item.Awarded == true)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"{i + 1}. {service[i].Name} | {service[i].Category} | {service[i].Price} PLN");
+                    Console.WriteLine($"{x++}. {item.Name} | {item.Category} | {item.Price} PLN");
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"{i + 1}. {service[i].Name} | {service[i].Category} | {service[i].Price} PLN");
+                    Console.WriteLine($"{x++}. {item.Name} | {item.Category} | {item.Price} PLN");
                 }
             }
             Console.ForegroundColor = ConsoleColor.White;
         }
-        public static int ItemSelection(List<Item> service)
+        public static int ItemSelection(List<Item> service) 
         {
             Console.Clear();
             ShowAllItems(service);
